@@ -47,6 +47,22 @@ namespace Sudoku.ConsoleApp
 
         private static bool isValidSudoku(int[,] sudoku)
         {
+            for (int s = 0; s < 9; s += 3)
+            {
+                for (int m = 0; m < 9; m += 3)
+                {
+                    HashSet<int> blocos = new HashSet<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (!blocos.Add(sudoku[i + s, j + m]))
+                                return false;
+                        }
+                    }
+                }
+            }
+
             for (int linha = 0; linha < 9; linha++)
             {
                 int[] ocorrenciaDoNumero = new int[9];      //cada numero só pode aparecer 1 vez na linha
