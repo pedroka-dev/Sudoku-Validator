@@ -9,43 +9,31 @@ namespace Sudoku.ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        private static bool isValidSudoku(int[,] sudoku)
         {
-            /*string sudokuString =
-                "1 3 2 5 7 9 4 6 8 \n" +
-                "4 9 8 2 6 1 3 7 5 \n" +
-                "7 5 6 3 8 4 2 1 9 \n" +
-                "6 4 3 1 5 8 7 9 2 \n" +
-                "5 2 1 7 9 3 8 4 6 \n" +
-                "9 8 7 4 2 6 5 3 1 \n" +
-                "2 1 4 9 3 5 6 8 7 \n" +
-                "3 6 5 8 1 7 9 2 4 \n" +
-                "8 7 9 6 4 2 1 5 3 \n";*/
+            if (!isValidBlock(sudoku))
+                return false;
 
-            int[,] sudokuMatrix = new int[9,9] {
-                     {1,3,2,5,7,9,4,6,8},
-                     {4,9,8,2,6,1,3,7,5},
-                     {7,5,6,3,8,4,2,1,9},
-                     {6,4,3,1,5,8,7,9,2},
-                     {5,2,1,7,9,3,8,4,6},
-                     {9,8,7,4,2,6,5,3,1},
-                     {2,1,4,9,3,5,6,8,7},
-                     {3,6,5,8,1,7,9,2,4},
-                     {8,7,9,6,4,2,1,5,3}};
+            for (int linha = 0; linha < 9; linha++)
+            {
+                int[] sudokuRow = Enumerable.Range(0, sudoku.GetLength(1)).Select(x => sudoku[linha, x]).ToArray();    //gets entire row
 
-            bool isSudoku = isValidSudoku(sudokuMatrix);
-            if(isSudoku)
-            {
-                Console.WriteLine("SIM");
+                if (!isValidRow(sudokuRow))
+                    return false;
             }
-            else
+
+            for (int coluna = 0; coluna < 9; coluna++)
             {
-                Console.WriteLine("NÃO");
+                int[] sudokuColumn = Enumerable.Range(0, sudoku.GetLength(0)).Select(x => sudoku[x, coluna]).ToArray();    //gets entire column
+
+                if (!isValidColumn(sudokuColumn))
+                    return false;
             }
-            Console.ReadLine();
+
+            return true;
         }
 
-        private static bool isValidSudoku(int[,] sudoku)
+        private static bool isValidBlock(int[,] sudoku)     //idk lol
         {
             for (int s = 0; s < 9; s += 3)
             {
@@ -57,47 +45,78 @@ namespace Sudoku.ConsoleApp
                         for (int j = 0; j < 3; j++)
                         {
                             if (!blocos.Add(sudoku[i + s, j + m]))
+                                Console.WriteLine("A block has an invalid value.");
                                 return false;
                         }
                     }
                 }
             }
 
-            for (int linha = 0; linha < 9; linha++)
+            return true;
+        }
+
+        private static bool isValidRow(int[] row)
+        {
+            int[] numberOccurrences = new int[9];      //all numbers must appear only once in the row
+
+            for (int number = 0; number < 9; number++)
             {
-                int[] ocorrenciaDoNumero = new int[9];      //cada numero só pode aparecer 1 vez na linha
-
-                for (int termo = 0; termo < 9; termo++)
-                {
-                    int valor = sudoku[linha, termo];
-                    ocorrenciaDoNumero[valor - 1]++;
-                }
-
-                foreach (int val in ocorrenciaDoNumero)
-                {
-                    if (val != 1)
-                        return false;
-                }
+                int value = row[number];
+                numberOccurrences[value - 1]++;
             }
 
-            for (int coluna = 0; coluna < 9; coluna++)
+            foreach (int val in numberOccurrences)
             {
-                int[] ocorrenciaDoNumero = new int[9];      //cada numero só pode aparecer 1 vez na coluna
-
-                for (int termo = 0; termo < 9; termo++)
-                {
-                    int valor = sudoku[termo, coluna];
-                    ocorrenciaDoNumero[valor - 1]++;
-                }
-
-                foreach (int val in ocorrenciaDoNumero)
-                {
-                    if (val != 1)
-                        return false;
-                }
+                if (val != 1)
+                    Console.WriteLine("A row has an invalid value.");
+                    return false;
             }
 
             return true;
+        }
+
+        private static bool isValidColumn(int[] column)
+        {
+            int[] numberOccurences = new int[9];      //all numbers must appear only once in the column
+
+            for (int number = 0; number < 9; number++)
+            {
+                int value = column[number];
+                numberOccurences[value - 1]++;
+            }
+
+            foreach (int val in numberOccurences)
+            {
+                if (val != 1)
+                    Console.WriteLine("A column has an invalid value.");
+                    return false;
+            }
+
+            return true;
+        }
+
+        static void Main(string[] args)
+        {
+            int[,] sudokuMatrix = new int[9, 9] {
+                     {1,3,2,5,7,9,4,6,8},
+                     {4,9,8,2,6,1,3,7,5},
+                     {7,5,6,3,8,4,2,1,9},
+                     {6,4,3,1,5,8,7,9,2},
+                     {5,2,1,7,9,3,8,4,6},
+                     {9,8,7,4,2,6,5,3,1},
+                     {2,1,4,9,3,5,6,8,7},
+                     {3,6,5,8,1,7,9,2,4},
+                     {8,7,9,6,4,2,1,5,3}};
+
+            if (isValidSudoku(sudokuMatrix))
+            {
+                Console.WriteLine("SIM");
+            }
+            else
+            {
+                Console.WriteLine("NÃO");
+            }
+            Console.ReadLine();
         }
     }
 }
