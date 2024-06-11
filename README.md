@@ -1,10 +1,13 @@
 # Sudoku-Validator
 A console application that says if string is a valid Sudoku
 
-1 - What is Sudoku?
+# What is a Sudoku?
 
-The Sudoku grid is a 9x9 matrix of integers. For it to be a valid solution, each row and column must contain all numbers from 1 to 9. Additionally, if we divide the matrix into nine 3x3 regions, each of these regions must also contain the numbers from 1 to 9. The example below shows a grid that is a valid Sudoku solution.
-2 - Example:
+The Sudoku grid is a 9x9 matrix of integers. For it to be a valid solution, each row and column must contain all numbers from 1 to 9. 
+Additionally, if we divide the matrix into nine 3x3 regions, each of these regions must also contain the numbers from 1 to 9. 
+The example below shows a grid that is a valid Sudoku solution.
+
+# Example
 
 The input consists of several matrices. Each matrix is given in 9 lines, where each line contains 9 integers. Your program should print "SIM" if the matrix is a valid Sudoku solution, and "NAO" otherwise.
 Input:
