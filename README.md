@@ -1,18 +1,13 @@
 # Sudoku-Validator
-A console application that says if string is a valid sudoku or something (wip)
+A console application that says if string is a valid Sudoku
 
-# 1 - O que é Sudoku
-A matriz do jogo é uma matriz deinteiros 9 x 9 . Para ser uma solução do problema, cada linha e coluna deveconter todos os números de 1 a 9. Além disso, se dividirmos a matriz em 9regiões 3 x 3, cada uma destas regiões também deve conter os números de 1 a 9.O exemplo abaixo mostra uma matriz que é uma solução do problema.
+1 - What is Sudoku?
 
+The Sudoku grid is a 9x9 matrix of integers. For it to be a valid solution, each row and column must contain all numbers from 1 to 9. Additionally, if we divide the matrix into nine 3x3 regions, each of these regions must also contain the numbers from 1 to 9. The example below shows a grid that is a valid Sudoku solution.
+2 - Example:
 
-# 2 - Exemplo:
-
-Nas linhas seguintes são dadas asn matrizes. Cada matriz é dada em 9 linhas, em que cada linha contém 9 númerosinteiros. O seu programa deverá imprimir SIM se a matriz for a solução de um problema de Sudoku, e NAO caso contrário. Exemplo:
-
-Entrada:
-
-1 3 2 5 7 9 4 6 8
-
+The input consists of several matrices. Each matrix is given in 9 lines, where each line contains 9 integers. Your program should print "SIM" if the matrix is a valid Sudoku solution, and "NAO" otherwise.
+Input:
 4 9 8 2 6 1 3 7 5
 
 7 5 6 3 8 4 2 1 9
@@ -31,6 +26,5 @@ Entrada:
 
  
 
-Saída:
-
+Output:
 SIM
